@@ -7,6 +7,7 @@ const newsArticlesRouter = require('./controllers/newsarticles');
 const newsFeedsRouter = require('./controllers/newsfeeds');
 const usersRouter = require('./controllers/users');
 const middleware = require('./utils/middleware');
+const loginRouter = require('./controllers/login');
 
 const app = express();
 require('express-async-errors');
@@ -19,12 +20,14 @@ mongoose.connect(config.MONGODB_URL)
 
 app.use(express.json());
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
 
 app.use('/api/categories', categoriesRouter);
 app.use('/api/feedboards', feedBoardsRouter);
 app.use('/api/newsarticles', newsArticlesRouter);
 app.use('/api/newsfeeds', newsFeedsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
