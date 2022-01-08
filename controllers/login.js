@@ -1,5 +1,4 @@
-const config = require('../utils/config');
-const jwt = require('jsonwebtoken');
+const tokenmanager = require('../utils/tokenmanager');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const User = require('../models/user');
@@ -24,12 +23,11 @@ loginRouter.post('/', async (request, response) => {
         id: user.id
     };
 
-    const token = jwt.sign(tokenData, config.TOKENSECRET);
+    const token = await tokenmanager.createJWT(tokenData);
 
     response.status(200).send({
-        loginToken: token,
-        username: user.username,
-        name: user.name
+        userToken: token,
+        username: user.username
     });
 });
 
