@@ -8,9 +8,9 @@ const newsArticleSchema = new mongoose.Schema({
         unique: true
     },
     language: String,
-    categories: [String],
+    category: String,
     usersRead: [String],
-    newsfeeds: [String]
+    sourceNewsFeed: String
 });
 
 newsArticleSchema.set('toJSON', {

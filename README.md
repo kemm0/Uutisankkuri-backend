@@ -17,9 +17,13 @@ TOKENSECRET=some_secret_here
 ```
 npm install
 ```
-5. Run the program
+5. Run the server program
 ```
 node index.js
+```
+6. Start fetching articles to the database. Run in another terminal:
+```
+node articlefetcher.js
 ```
 
 #TODO
